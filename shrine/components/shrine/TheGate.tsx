@@ -166,7 +166,6 @@ export const shrine = async () => {
           background: 'linear-gradient(to right, transparent, rgba(245,247,250,0.95), rgba(212,168,79,0.8), rgba(245,247,250,0.95), transparent)',
           filter: 'blur(0.3px)',
           boxShadow: '0 0 8px rgba(245,247,250,0.6), 0 0 20px rgba(212,168,79,0.4)',
-          scaleX: 0,
           opacity: 0,
         }}
       />

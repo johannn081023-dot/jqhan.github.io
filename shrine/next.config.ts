@@ -2,6 +2,7 @@ import type { NextConfig } from 'next'
 import createMDX from '@next/mdx'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
+import path from 'path'
 
 const withMDX = createMDX({
   options: {
@@ -11,6 +12,7 @@ const withMDX = createMDX({
 })
 
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: path.join(__dirname, '../'),
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
   images: {
     formats: ['image/avif', 'image/webp'],
