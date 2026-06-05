@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://johnpaulgiftson.com/sitemap.xml
+Sitemap: https://johannn081023-dot.github.io/jqhan.github.io/sitemap.xml

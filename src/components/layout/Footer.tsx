@@ -11,7 +11,7 @@ const links = {
     { label: 'Contact', to: '/contact' },
   ],
   social: [
-    { label: 'GitHub', href: 'https://github.com/johnpaulgiftson', icon: Github },
+    { label: 'GitHub', href: 'https://github.com/johannn081023-dot', icon: Github },
     { label: 'LinkedIn', href: 'https://linkedin.com/in/johnpaulgiftson', icon: Linkedin },
     { label: 'Email', href: `mailto:${profile.email}`, icon: Mail },
   ],

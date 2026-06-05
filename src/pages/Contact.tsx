@@ -5,7 +5,7 @@ import PageTransition from '../components/layout/PageTransition'
 import { profile } from '../data'
 
 const socials = [
-  { label: 'GitHub', href: 'https://github.com/johnpaulgiftson', icon: Github, handle: '@johnpaulgiftson' },
+  { label: 'GitHub', href: 'https://github.com/johannn081023-dot', icon: Github, handle: '@johannn081023-dot' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/johnpaulgiftson', icon: Linkedin, handle: '/johnpaulgiftson' },
   { label: 'Email', href: `mailto:${profile.email}`, icon: Mail, handle: profile.email },
   { label: 'Business', href: `mailto:${profile.businessEmail}`, icon: Mail, handle: profile.businessEmail },
