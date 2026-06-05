@@ -27,7 +27,7 @@
     "tailwind-merge": "^2.5.5",
     "lucide-react": "^0.468.0",
     "ai": "^4.0.0",
-    "@anthropic-ai/sdk": "^0.32.1",
+    "@google/generative-ai": "^0.21.0",
     "rehype-pretty-code": "^0.14.0",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.0",

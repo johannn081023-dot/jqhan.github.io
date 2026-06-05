@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Anthropic from '@anthropic-ai/sdk'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 
-const client = new Anthropic()
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!)
 
 const SWORD_SYSTEM_PROMPTS: Record<string, string> = {
   strategist:
@@ -39,23 +39,18 @@ export async function POST(req: NextRequest) {
     // Generate all 7 perspectives in parallel
     const swordIds = Object.keys(SWORD_SYSTEM_PROMPTS)
 
-    const perspectivePromises = swordIds.map((id) =>
-      client.messages
-        .create({
-          model: 'claude-haiku-4-5-20251001',
-          max_tokens: 150,
-          system: SWORD_SYSTEM_PROMPTS[id],
-          messages: [{ role: 'user', content: question }],
+    const perspectivePromises = swordIds.map(async (id) => {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: 'gemini-1.5-flash',
+          systemInstruction: SWORD_SYSTEM_PROMPTS[id],
         })
-        .then((res) => ({
-          id,
-          response: (res.content[0] as { text: string }).text,
-        }))
-        .catch(() => ({
-          id,
-          response: `[${id}] — perspective unavailable.`,
-        }))
-    )
+        const result = await model.generateContent(question)
+        return { id, response: result.response.text() }
+      } catch {
+        return { id, response: `[${id}] — perspective unavailable.` }
+      }
+    })
 
     const perspectives = await Promise.all(perspectivePromises)
     const responses: Record<string, string> = {}
@@ -63,21 +58,19 @@ export async function POST(req: NextRequest) {
       responses[id] = response
     })
 
-    // Judge elimination order
-    const judgingPayload = JSON.stringify({
-      question,
-      responses,
+    // Judge elimination order — use JSON mode for reliable parsing
+    const judgeModel = genAI.getGenerativeModel({
+      model: 'gemini-1.5-flash',
+      systemInstruction: ELIMINATION_PROMPT,
+      generationConfig: {
+        responseMimeType: 'application/json',
+      },
     })
 
-    const judgment = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 400,
-      system: ELIMINATION_PROMPT,
-      messages: [{ role: 'user', content: judgingPayload }],
-    })
-
-    const judgmentText = (judgment.content[0] as { text: string }).text
-    const { eliminated, winner, finalAnswer } = JSON.parse(judgmentText)
+    const judgmentResult = await judgeModel.generateContent(
+      JSON.stringify({ question, responses })
+    )
+    const { eliminated, winner, finalAnswer } = JSON.parse(judgmentResult.response.text())
 
     return NextResponse.json({ responses, eliminated, winner, finalAnswer })
   } catch (error) {
