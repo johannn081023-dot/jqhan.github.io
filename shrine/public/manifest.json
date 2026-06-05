@@ -1,0 +1,17 @@
+{
+  "name": "The Shrine — John Paul Giftson",
+  "short_name": "The Shrine",
+  "description": "A digital shrine of curiosity, engineering, and ideas worth surviving.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0615",
+  "theme_color": "#0B0615",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,533 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE SHRINE — Global Stylesheet
+   Japanese shrine aesthetics × premium digital craftsmanship
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS CUSTOM PROPERTIES ─────────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-void:       #05030A;
+  --bg-abyss:      #0B0615;
+  --bg-deep:       #120A24;
+  --bg-veil:       #170F30;
+  --bg-surface:    #1E1540;
+  --bg-overlay:    #251B4E;
+
+  /* Typography */
+  --text-silver:   #C9CDD2;
+  --text-bright:   #D7DBE0;
+  --text-katana:   #F5F7FA;
+  --text-dim:      #8A8E94;
+  --text-muted:    #A8ACB2;
+
+  /* Accents */
+  --sakura:        #FFB7C5;
+  --sakura-pale:   #FFE4EB;
+  --gold:          #D4A84F;
+  --gold-bright:   #F2C96A;
+  --amber:         #F6B94A;
+  --moonlight:     #8CA4FF;
+  --jade:          #7FD6B2;
+  --crimson:       #B33A3A;
+
+  /* Fonts — resolved from next/font CSS variables set on <html> */
+  --font-sans:        var(--font-inter), system-ui, sans-serif;
+  --font-display:     var(--font-cormorant), Georgia, serif;
+  --font-mono:        var(--font-jetbrains), Menlo, monospace;
+  --font-japanese:    var(--font-noto-jp), serif;
+  --font-calligraphy: var(--font-shippori), serif;
+
+  /* Motion */
+  --ease-shrine:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-blade:     cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-cinematic: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* Layout */
+  --nav-height:    72px;
+  --max-width:     1280px;
+  --prose-width:   680px;
+}
+
+/* ─── BASE RESET ─────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* Lenis will override this */
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-abyss);
+  color: var(--text-silver);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  cursor: none; /* Custom katana cursor */
+}
+
+/* ─── CURSOR OVERRIDE ───────────────────────────────────────────────────── */
+*, *:hover {
+  cursor: none !important;
+}
+
+/* ─── SELECTION ─────────────────────────────────────────────────────────── */
+::selection {
+  background-color: rgba(212, 168, 79, 0.25);
+  color: var(--text-katana);
+}
+
+::-moz-selection {
+  background-color: rgba(212, 168, 79, 0.25);
+  color: var(--text-katana);
+}
+
+/* ─── SCROLLBAR ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-bright);
+}
+
+/* ─── FOCUS ─────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ─── TYPOGRAPHY BASE ───────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text-katana);
+}
+
+.font-japanese {
+  font-family: var(--font-japanese);
+}
+
+.font-calligraphy {
+  font-family: var(--font-calligraphy);
+}
+
+p {
+  font-family: var(--font-sans);
+  color: var(--text-silver);
+}
+
+code, pre {
+  font-family: var(--font-mono);
+}
+
+/* ─── LENIS SMOOTH SCROLL ───────────────────────────────────────────────── */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ─── COMPONENT LAYERS ──────────────────────────────────────────────────── */
+@layer components {
+
+  /* Shrine containers */
+  .shrine-container {
+    @apply max-w-[1280px] mx-auto px-6 md:px-10 lg:px-16;
+  }
+
+  .shrine-section {
+    @apply relative min-h-screen flex flex-col justify-center overflow-hidden;
+  }
+
+  /* Glass surfaces */
+  .glass-shrine {
+    background: rgba(18, 10, 36, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 168, 79, 0.1);
+  }
+
+  .glass-shrine-hover {
+    @apply glass-shrine transition-all duration-600;
+  }
+  .glass-shrine-hover:hover {
+    background: rgba(30, 21, 64, 0.7);
+    border-color: rgba(212, 168, 79, 0.25);
+    box-shadow: 0 0 40px rgba(212, 168, 79, 0.1);
+  }
+
+  /* Gold border lines */
+  .line-gold {
+    @apply h-px w-full;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .line-gold-v {
+    @apply w-px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  }
+
+  /* Shrine text effects */
+  .text-shrine-gradient {
+    background: linear-gradient(135deg, var(--text-katana) 0%, var(--gold) 50%, var(--text-silver) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-sakura-gradient {
+    background: linear-gradient(135deg, var(--text-katana) 0%, var(--sakura) 60%, var(--moonlight) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-moonlight-gradient {
+    background: linear-gradient(135deg, var(--moonlight) 0%, var(--text-katana) 50%, var(--moonlight) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Glow effects */
+  .glow-gold {
+    text-shadow: 0 0 20px rgba(212, 168, 79, 0.5), 0 0 60px rgba(212, 168, 79, 0.2);
+  }
+
+  .glow-sakura {
+    text-shadow: 0 0 20px rgba(255, 183, 197, 0.5), 0 0 60px rgba(255, 183, 197, 0.2);
+  }
+
+  .glow-moonlight {
+    text-shadow: 0 0 20px rgba(140, 164, 255, 0.5), 0 0 60px rgba(140, 164, 255, 0.2);
+  }
+
+  /* Japanese decorative elements */
+  .torii-line {
+    position: relative;
+  }
+
+  .torii-line::before,
+  .torii-line::after {
+    content: '—';
+    margin: 0 0.75rem;
+    color: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* Shrine seal */
+  .shrine-seal {
+    @apply relative inline-flex items-center justify-center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--crimson);
+    color: var(--crimson);
+    font-family: var(--font-japanese);
+  }
+
+  /* Scroll paper texture */
+  .scroll-paper {
+    background: var(--bg-deep);
+    position: relative;
+  }
+  .scroll-paper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  /* Achievement seal */
+  .achievement-seal {
+    @apply relative overflow-hidden rounded-full;
+    background: radial-gradient(circle at center, var(--bg-surface) 0%, var(--bg-deep) 100%);
+    border: 1px solid rgba(212, 168, 79, 0.3);
+    box-shadow: 0 0 20px rgba(212, 168, 79, 0.15), inset 0 1px 0 rgba(212, 168, 79, 0.1);
+  }
+
+  .achievement-seal.unlocked {
+    border-color: var(--gold);
+    box-shadow: 0 0 30px rgba(212, 168, 79, 0.5), 0 0 80px rgba(212, 168, 79, 0.2);
+    animation: sealGlow 2s ease-in-out infinite;
+  }
+
+  /* Navigation links */
+  .nav-link {
+    @apply relative font-sans text-sm tracking-widest uppercase text-silver-muted transition-colors duration-400;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.4s var(--ease-shrine);
+  }
+
+  .nav-link:hover {
+    color: var(--text-katana);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Shimmer loading state */
+  .shimmer-shrine {
+    background: linear-gradient(
+      105deg,
+      var(--bg-deep) 40%,
+      rgba(212, 168, 79, 0.08) 50%,
+      var(--bg-deep) 60%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+}
+
+/* ─── UTILITY LAYERS ─────────────────────────────────────────────────────── */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .writing-vertical { writing-mode: vertical-rl; text-orientation: mixed; }
+  .writing-vertical-lr { writing-mode: vertical-lr; }
+
+  .clip-katana {
+    clip-path: polygon(0% 0%, 95% 0%, 100% 50%, 95% 100%, 0% 100%);
+  }
+
+  .clip-seal {
+    clip-path: circle(50% at 50% 50%);
+  }
+
+  .perspective-shrine {
+    perspective: 1200px;
+    perspective-origin: 50% 40%;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* GPU compositing hint */
+  .will-animate {
+    will-change: transform, opacity;
+  }
+
+  /* Animate in delay utilities */
+  .delay-75  { animation-delay: 75ms; }
+  .delay-100 { animation-delay: 100ms; }
+  .delay-150 { animation-delay: 150ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-600 { animation-delay: 600ms; }
+  .delay-700 { animation-delay: 700ms; }
+  .delay-800 { animation-delay: 800ms; }
+  .delay-1000 { animation-delay: 1000ms; }
+  .delay-1200 { animation-delay: 1200ms; }
+  .delay-1500 { animation-delay: 1500ms; }
+
+  /* Hidden but revealed by animation */
+  .animate-hidden {
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+}
+
+/* ─── PROSE OVERRIDES (Scrolls / Writing) ───────────────────────────────── */
+.shrine-prose {
+  font-family: var(--font-sans);
+  color: var(--text-silver);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  max-width: var(--prose-width);
+}
+
+.shrine-prose h1,
+.shrine-prose h2,
+.shrine-prose h3,
+.shrine-prose h4 {
+  font-family: var(--font-display);
+  color: var(--text-katana);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.shrine-prose h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+.shrine-prose h2 { font-size: clamp(1.375rem, 3vw, 1.875rem); }
+.shrine-prose h3 { font-size: clamp(1.125rem, 2vw, 1.5rem); }
+
+.shrine-prose p { margin-bottom: 1.5rem; }
+
+.shrine-prose a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212, 168, 79, 0.3);
+  transition: border-color 0.3s;
+}
+.shrine-prose a:hover {
+  border-color: var(--gold);
+}
+
+.shrine-prose strong {
+  color: var(--text-katana);
+  font-weight: 600;
+}
+
+.shrine-prose em {
+  color: var(--sakura);
+  font-style: italic;
+}
+
+.shrine-prose blockquote {
+  border-left: 2px solid var(--gold);
+  margin-left: 0;
+  padding-left: 1.5rem;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+.shrine-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: rgba(30, 21, 64, 0.8);
+  border: 1px solid rgba(212, 168, 79, 0.15);
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  color: var(--jade);
+}
+
+.shrine-prose pre {
+  background: var(--bg-deep);
+  border: 1px solid rgba(212, 168, 79, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 2rem 0;
+  font-size: 0.875rem;
+}
+
+.shrine-prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-silver);
+}
+
+.shrine-prose ul {
+  list-style: none;
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.shrine-prose ul li::before {
+  content: '—';
+  color: var(--gold);
+  margin-right: 0.75rem;
+  margin-left: -1.5rem;
+}
+
+.shrine-prose ol {
+  list-style: none;
+  counter-reset: shrine-counter;
+  padding-left: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.shrine-prose ol li {
+  counter-increment: shrine-counter;
+  position: relative;
+}
+
+.shrine-prose ol li::before {
+  content: counter(shrine-counter, cjk-decimal);
+  position: absolute;
+  left: -2.5rem;
+  color: var(--gold);
+  font-family: var(--font-japanese);
+  font-size: 0.85em;
+}
+
+.shrine-prose hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 3rem 0;
+}
+
+.shrine-prose img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(212, 168, 79, 0.1);
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── PRINT ──────────────────────────────────────────────────────────────── */
+@media print {
+  body {
+    background: white;
+    color: black;
+    cursor: default !important;
+  }
+  .no-print { display: none !important; }
+}

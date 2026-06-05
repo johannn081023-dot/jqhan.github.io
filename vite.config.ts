@@ -2,13 +2,12 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-// NOTE: If deploying to GitHub Pages WITHOUT a custom domain, set base to '/<repo-name>/'
-// If using a custom domain (e.g., johnpaulgiftson.com), keep base as '/'
+// GitHub Pages project site URL: https://johannn081023-dot.github.io/jqhan.github.io/
 export default defineConfig({
   plugins: [react()],
-  base: './',
+  base: '/jqhan.github.io/',
   build: {
-    outDir: '.',
+    outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
     rollupOptions: {
