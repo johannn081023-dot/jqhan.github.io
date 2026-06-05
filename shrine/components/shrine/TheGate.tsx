@@ -217,13 +217,13 @@ function GateScene({
   headlineIndex, onEnter, enterState, half,
 }: GateSceneProps) {
   return (
-    <div className="absolute inset-0" style={{ background: '#0B0615' }}>
+    <div className="absolute inset-0" style={{ background: '#080808' }}>
 
       {/* ── SKY GRADIENT ── */}
       <div
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse 80% 55% at 50% 0%, #1A0F30 0%, #0B0615 50%, #05030A 100%)',
+          background: 'radial-gradient(ellipse 80% 55% at 50% 0%, #181818 0%, #080808 50%, #050505 100%)',
         }}
       />
 
@@ -285,17 +285,17 @@ function GateScene({
           {/* Back mountains — very dark */}
           <path
             d="M0,250 L80,180 L160,220 L240,140 L320,190 L400,120 L480,170 L560,100 L640,160 L720,90 L800,150 L880,80 L960,140 L1040,100 L1120,160 L1200,110 L1280,170 L1360,130 L1440,200 L1440,400 L0,400 Z"
-            fill="#08051A"
+            fill="#0A0A0A"
           />
           {/* Mid mountains */}
           <path
             d="M0,320 L120,240 L200,280 L300,200 L400,260 L500,180 L600,240 L700,170 L800,230 L900,160 L1000,220 L1100,180 L1200,240 L1300,200 L1440,280 L1440,400 L0,400 Z"
-            fill="#0D0820"
+            fill="#0E0E0E"
           />
           {/* Front hill silhouette */}
           <path
             d="M0,370 L200,320 L400,340 L600,300 L800,330 L1000,310 L1200,350 L1440,330 L1440,400 L0,400 Z"
-            fill="#0B0615"
+            fill="#080808"
           />
           {/* Mist layer */}
           <path
@@ -360,32 +360,39 @@ function GateScene({
         </div>
       </motion.div>
 
+      {/* ── TEXT BACKDROP — keeps hero text crisp over the scene ── */}
+      <div
+        className="absolute inset-x-0 top-0 h-[52%] pointer-events-none z-10"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(8,8,8,0.72) 0%, rgba(8,8,8,0.3) 70%, transparent 100%)',
+        }}
+      />
+
       {/* ── HERO CONTENT ── */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6">
+      <div className="absolute inset-0 flex flex-col items-center justify-start pt-14 md:pt-20 z-20 px-6">
 
         {/* Japanese subtitle */}
         <motion.p
-          className="text-xs tracking-[0.4em] uppercase mb-6"
-          style={{ color: '#D4A84F', fontFamily: 'var(--font-japanese)', opacity: 0.7 }}
+          className="text-xs tracking-[0.5em] uppercase mb-5"
+          style={{ color: '#D4A84F', fontFamily: 'var(--font-japanese)' }}
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 0.7, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
         >
           神社へようこそ
         </motion.p>
 
         {/* Rotating headline */}
-        <div className="h-[1.2em] overflow-hidden mb-8">
+        <div className="h-[1.15em] overflow-hidden mb-6">
           <AnimatePresence mode="wait">
             <motion.h1
               key={headlineIndex}
               className="text-center text-shrine leading-tight"
               style={{
                 fontFamily: 'var(--font-display)',
-                fontWeight: 300,
-                fontStyle: 'italic',
-                letterSpacing: '-0.02em',
-                background: 'linear-gradient(135deg, #F5F7FA 0%, #D7DBE0 40%, #D4A84F 80%)',
+                fontWeight: 800,
+                letterSpacing: '-0.03em',
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #E8E8E8 40%, #D4A84F 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -402,67 +409,61 @@ function GateScene({
 
         {/* Description */}
         <motion.p
-          className="text-center max-w-md mb-12 text-base leading-relaxed"
-          style={{ color: '#8A8E94', fontFamily: 'var(--font-sans)' }}
+          className="text-center max-w-sm mb-10 text-sm md:text-base leading-relaxed"
+          style={{ color: '#B0B0B8', fontFamily: 'var(--font-sans)', fontWeight: 400 }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
         >
-          A digital shrine where AI engineering, data systems,
-          and relentless curiosity converge.
+          AI engineering, data systems, and relentless curiosity.
           Built by{' '}
-          <span style={{ color: '#C9CDD2' }}>John Paul Giftson</span>
-          {' '}— AI & ML student, Winnipeg.
+          <span style={{ color: '#F0F0F0', fontWeight: 600 }}>John Paul Giftson</span>
+          {' '}— Winnipeg.
         </motion.p>
 
         {/* CTA */}
         <motion.button
           onClick={onEnter}
           disabled={enterState !== 'idle'}
-          className="group relative overflow-hidden px-10 py-4 rounded-sm"
+          className="group relative overflow-hidden px-12 py-4 rounded-sm"
           style={{
-            border: '1px solid rgba(212, 168, 79, 0.4)',
-            background: 'rgba(11, 6, 21, 0.6)',
-            letterSpacing: '0.25em',
+            border: '1px solid rgba(212,168,79,0.65)',
+            background: 'rgba(8,8,8,0.5)',
+            letterSpacing: '0.28em',
           }}
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.03, borderColor: 'rgba(212,168,79,0.9)' }}
+          whileTap={{ scale: 0.97 }}
           data-hoverable
         >
           {/* Shimmer on hover */}
           <div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-600"
             style={{
-              background:
-                'linear-gradient(105deg, transparent 40%, rgba(212,168,79,0.12) 50%, transparent 60%)',
+              background: 'linear-gradient(105deg, transparent 40%, rgba(212,168,79,0.15) 50%, transparent 60%)',
               backgroundSize: '200% 100%',
               animation: 'shimmer 2s linear infinite',
             }}
           />
-
-          {/* Gold bottom edge */}
+          {/* Gold fill on hover */}
           <div
-            className="absolute bottom-0 left-0 right-0 h-px transition-opacity duration-300"
-            style={{
-              background: 'linear-gradient(to right, transparent, #D4A84F, transparent)',
-              opacity: 0.6,
-            }}
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+            style={{ background: 'rgba(212,168,79,0.06)' }}
           />
 
           <span
-            className="relative text-xs font-medium tracking-[0.3em] uppercase"
+            className="relative text-xs font-semibold tracking-[0.28em] uppercase"
             style={{
-              color: enterState === 'idle' ? '#D4A84F' : '#8A8E94',
+              color: enterState === 'idle' ? '#E8C878' : '#888888',
               fontFamily: 'var(--font-sans)',
             }}
           >
-            {enterState === 'idle' && '⛩ Enter the Shrine'}
-            {enterState === 'slicing' && '✦ Drawing the blade...'}
-            {enterState === 'revealing' && '⚔ The gate opens...'}
-            {enterState === 'done' && '→ Entering...'}
+            {enterState === 'idle' && '⛩  Enter the Shrine'}
+            {enterState === 'slicing' && '✦  Drawing the blade...'}
+            {enterState === 'revealing' && '⚔  The gate opens...'}
+            {enterState === 'done' && '→  Entering...'}
           </span>
         </motion.button>
 
@@ -475,13 +476,13 @@ function GateScene({
         >
           <span
             className="text-2xs tracking-widest uppercase"
-            style={{ color: '#4A3F5C', fontFamily: 'var(--font-sans)' }}
+            style={{ color: '#555555', fontFamily: 'var(--font-sans)' }}
           >
             Scroll to explore
           </span>
           <motion.div
             className="w-px h-8"
-            style={{ background: 'linear-gradient(to bottom, rgba(212,168,79,0.4), transparent)' }}
+            style={{ background: 'linear-gradient(to bottom, rgba(212,168,79,0.5), transparent)' }}
             animate={{ scaleY: [0, 1, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -492,7 +493,7 @@ function GateScene({
       <div
         className="absolute bottom-0 inset-x-0 h-32 pointer-events-none"
         style={{
-          background: 'linear-gradient(to top, rgba(11,6,21,0.8) 0%, transparent 100%)',
+          background: 'linear-gradient(to top, rgba(8,8,8,0.85) 0%, transparent 100%)',
         }}
       />
 
@@ -501,7 +502,7 @@ function GateScene({
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 50%, rgba(5,3,10,0.6) 100%)',
+            'radial-gradient(ellipse 80% 60% at 50% 50%, transparent 50%, rgba(5,5,5,0.6) 100%)',
         }}
       />
     </div>

@@ -12,12 +12,12 @@ const config: Config = {
       colors: {
         // Primary Backgrounds — deep midnight shrine atmosphere
         shrine: {
-          void:     '#05030A', // shadow depth
-          abyss:    '#0B0615', // primary bg
-          deep:     '#120A24', // secondary bg layer
-          veil:     '#170F30', // tertiary bg layer
-          surface:  '#1E1540', // elevated surfaces
-          overlay:  '#251B4E', // overlays, modals
+          void:     '#050505', // shadow depth
+          abyss:    '#080808', // primary bg
+          deep:     '#111111', // secondary bg layer
+          veil:     '#161616', // tertiary bg layer
+          surface:  '#1C1C1C', // elevated surfaces
+          overlay:  '#242424', // overlays, modals
         },
         // Typography — matte silver
         silver: {
@@ -68,10 +68,10 @@ const config: Config = {
       // ─── TYPOGRAPHY ────────────────────────────────────────────────────
       fontFamily: {
         sans:       ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display:    ['var(--font-cormorant)', 'Georgia', 'serif'],
+        display:    ['var(--font-playfair)', 'Georgia', 'serif'],
         mono:       ['var(--font-jetbrains)', 'Menlo', 'monospace'],
         japanese:   ['var(--font-noto-jp)', 'serif'],
-        calligraphy:['var(--font-shippori)', 'serif'],
+        calligraphy:['var(--font-noto-jp)', 'serif'],
       },
       fontSize: {
         '2xs':   ['0.625rem', { lineHeight: '1rem' }],

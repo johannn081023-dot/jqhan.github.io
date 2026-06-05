@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import {
   Inter,
-  Cormorant_Garamond,
+  Playfair_Display,
   JetBrains_Mono,
   Noto_Serif_JP,
-  Shippori_Mincho,
 } from 'next/font/google'
 import './globals.css'
 import { ShrineProviders } from '@/components/providers/ShrineProviders'
@@ -23,11 +22,11 @@ const inter = Inter({
   display: 'swap',
 })
 
-const cormorant = Cormorant_Garamond({
+const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   style: ['normal', 'italic'],
-  variable: '--font-cormorant',
+  variable: '--font-playfair',
   display: 'swap',
 })
 
@@ -42,14 +41,6 @@ const notoSerifJP = Noto_Serif_JP({
   subsets: ['latin'],
   weight: ['200', '300', '400', '500', '600', '700'],
   variable: '--font-noto-jp',
-  display: 'swap',
-  preload: false,
-})
-
-const shipporiMincho = Shippori_Mincho({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-shippori',
   display: 'swap',
   preload: false,
 })
@@ -174,7 +165,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${cormorant.variable} ${jetbrainsMono.variable} ${notoSerifJP.variable} ${shipporiMincho.variable} lenis lenis-smooth`}
+      className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} ${notoSerifJP.variable} lenis lenis-smooth`}
       suppressHydrationWarning
     >
       <head>

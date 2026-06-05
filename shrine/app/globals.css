@@ -10,12 +10,12 @@
 /* ─── CSS CUSTOM PROPERTIES ─────────────────────────────────────────────── */
 :root {
   /* Backgrounds */
-  --bg-void:       #05030A;
-  --bg-abyss:      #0B0615;
-  --bg-deep:       #120A24;
-  --bg-veil:       #170F30;
-  --bg-surface:    #1E1540;
-  --bg-overlay:    #251B4E;
+  --bg-void:       #050505;
+  --bg-abyss:      #080808;
+  --bg-deep:       #111111;
+  --bg-veil:       #161616;
+  --bg-surface:    #1C1C1C;
+  --bg-overlay:    #242424;
 
   /* Typography */
   --text-silver:   #C9CDD2;
@@ -36,10 +36,10 @@
 
   /* Fonts — resolved from next/font CSS variables set on <html> */
   --font-sans:        var(--font-inter), system-ui, sans-serif;
-  --font-display:     var(--font-cormorant), Georgia, serif;
+  --font-display:     var(--font-playfair), Georgia, serif;
   --font-mono:        var(--font-jetbrains), Menlo, monospace;
   --font-japanese:    var(--font-noto-jp), serif;
-  --font-calligraphy: var(--font-shippori), serif;
+  --font-calligraphy: var(--font-noto-jp), serif;
 
   /* Motion */
   --ease-shrine:    cubic-bezier(0.16, 1, 0.3, 1);
@@ -121,7 +121,7 @@ body {
 /* ─── TYPOGRAPHY BASE ───────────────────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: var(--text-katana);
