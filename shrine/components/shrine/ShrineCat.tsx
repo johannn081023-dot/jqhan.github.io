@@ -23,7 +23,7 @@ export function ShrineCat({ page, className = '' }: ShrineCatProps) {
   const [clickCount, setClickCount] = useState(0)
   const [message, setMessage] = useState('')
   const [showMessage, setShowMessage] = useState(false)
-  const timerRef = useRef<NodeJS.Timeout>()
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const handleClick = () => {
     const newCount = clickCount + 1
